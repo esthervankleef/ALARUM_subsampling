@@ -42,7 +42,7 @@ library(igraph)
 # ResPipe_CARD-3.0.3.meta.tsv                 # Can be found in input_files
 # CARD_lateral_coverage_specific.tsv          # Can be found in input_files
 # CARD_read_lengths_specific.tsv              # Can be found in input_files
-# Metagenomics_Metadata.csv                   # Could not be found, took from code original paper
+# Metagenomics_Metadata.csv                   # Could not be found, took from code original paper; checked with Kevin, is the same, except for total read counts for the 20M and 50M, so added those manually using the "subsamping_reads_meta.xlsx file
 # Infection_Data_For_Bayesian_Model.csv       # Could not be found, took from code original paper
 # bracken_combined_reads.tsv                  # Could not be found, took from code original paper
 
@@ -116,6 +116,20 @@ newnamesd1<-names(Corr_Count)
 
 metadata = read.csv(file = "./Input Files/Original_paper/Metagenomics_Metadata.csv", header = T, row.names = 1, check.names = F)
 attach(metadata)
+
+# Add rownames for Kenya and UK subsampled data (20M and 50M) - evk 16 february 2024
+meta_total_counts = read.csv(file = "./Input Files/subsamping_reads_meta.csv", header = T, row.names = 1, check.names = F, sep=';')
+meta_total_counts
+newrows_subsamp = which(rownames(meta_total_counts)%in%c("KENYA_30_SAMPLE_POOL_20M","KENYA_30_SAMPLE_POOL_50M","UK_30_SAMPLE_POOL_20M","UK_30_SAMPLE_POOL_50M"))
+
+head(metadata)
+newrows = which(rownames(metadata)%in%c("KENYA_30_SAMPLE_POOL","KENYA_POP_POOL","UK_30_SAMPLE_POOL","UK_POP_POOL"))
+newd = metadata[newrows,]
+rownames(newd) = c("KENYA_30_SAMPLE_POOL_20M","KENYA_30_SAMPLE_POOL_50M","UK_30_SAMPLE_POOL_20M","UK_30_SAMPLE_POOL_50M")
+newd$`TOTAL COUNT` = meta_total_counts$total_read_count[newrows_subsamp]
+newd$Classification = c("Ken_30_Pool_20M","Ken_30_Pool_50M","Uk_30_Pool_20M", "Uk_30_Pool_50M")
+newd$`Number of Samples in Population Pool`= c(177,177,157,157)
+metadata = rbind(metadata,newd) 
 
 fix(metadata)
 z = metadata[match(newnamesd1, rownames(metadata)),]
@@ -298,6 +312,7 @@ All_Antibiotic_Data2 = All_Antibiotic_Data[,!sapply(All_Antibiotic_Data, functio
 All_Antibiotic_Data2$Row.names<-NULL
 
 #First_Index <- grep("UK_POP_POOL", colnames(All_Antibiotic_Data2))+1 ####AMEND THIS DEPENDING ON NEED TO START ON FIRST AB
+# Changed this (evk 15 February 2024)
 First_Index <- grep("UK_POP_POOL_50M", colnames(All_Antibiotic_Data2))+1 ####AMEND THIS DEPENDING ON NEED TO START ON FIRST AB : FOR SUBANALYSES CHANGE THE GREP AS LAST COLUMN WITH SAMPLING COUNTS IS NOW WITH _50 ADDED TO IT
 Second_Index<-ncol(All_Antibiotic_Data2)                             ####AMEND THIS DEPENDING ON NEED TO FINISH ON LAST AB
 
@@ -350,6 +365,7 @@ write.csv(Res_Score_One_Two, "./Output Files/AMR_all.csv",row.names=F)
 
 Rcgc12<-Res_Score_One_Two
 
+# Changed this (evk 15 Feb 2024)
 #Rcgc12<-Rcgc12[,c("Antibiotic","CAMBODIA_POP_POOL", "KENYA_POP_POOL", "UK_POP_POOL")]
 Rcgc12<-Rcgc12[,c("Antibiotic","KENYA_30_SAMPLE_POOL_20M", "KENYA_30_SAMPLE_POOL_50M", "KENYA_30_SAMPLE_POOL",
                   "KENYA_POP_POOL_20M","KENYA_POP_POOL_50M", "UK_30_SAMPLE_POOL_20M", "UK_30_SAMPLE_POOL_50M",
@@ -417,9 +433,26 @@ ByMo3<-merge(ByMo2,Inf1,by=c("Antibiotic","Setting"),all=TRUE)
 
 ######################################################################
 # WAITING FOR THE RIGHT FILE TO BE SHARED BY KEVIN (EVK 15 February 2024)
+# Email Kevin:
+# The combined_bracken_species.csv I sent is the equivalent of the original bracken_combined_reads.tsv 
+# except for the format of the classification (first) column because I'm not sure how the original was 
+# generated from the respipe outputs. Respipe outputs a bracken report per sample with species name only 
+# - I merged all individual reports then pivoted wider to arrange samples by column. I think the only difference 
+# between the formats is the classification name in the original includes all ranks (much like a kraken report) whereas 
+# my version only has species. I'm not sure if a lookup file was used to merge kraken classifications onto the bracken 
+# species output but could not find any information on how the combined_bracken_species.csv was generated from the individual 
+# respipe bracken outputs in the original analysis. Sorry not too helpful here - I'll look into adding full ranks.
+
+# Basically, code below uses these full ranks to filter out enterobacteriaceae species so is helpful to have
+
 Tx1<-read.csv("./Input Files/Original_paper/bracken_combined_reads.tsv", sep = "\t",header=T,check.names = F, row.names = 1, quote = "#")
 attach(Tx1)
 fix(Tx1)
+
+# With the file provided by Kevin
+Tx1a<-read.csv("./Input Files/combined_bracken_species.csv", sep = "\t",header=T,check.names = F, row.names = 1, quote = "#")
+attach(Tx1a)
+fix(Tx1a)
 
 Tx2<-Tx1[,grepl("POOL",colnames(Tx1))]
 Tx2 <- add_rownames(Tx2, "Taxonomy")
