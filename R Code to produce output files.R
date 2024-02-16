@@ -120,15 +120,27 @@ attach(metadata)
 # Add rownames for Kenya and UK subsampled data (20M and 50M) - evk 16 february 2024
 meta_total_counts = read.csv(file = "./Input Files/subsamping_reads_meta.csv", header = T, row.names = 1, check.names = F, sep=';')
 meta_total_counts
-newrows_subsamp = which(rownames(meta_total_counts)%in%c("KENYA_30_SAMPLE_POOL_20M","KENYA_30_SAMPLE_POOL_50M","UK_30_SAMPLE_POOL_20M","UK_30_SAMPLE_POOL_50M"))
+newrows_subsamp = which(rownames(meta_total_counts)%in%c("KENYA_30_SAMPLE_POOL_20M","KENYA_30_SAMPLE_POOL_50M",
+                                                         "KENYA_POP_POOL_20M","KENYA_POP_POOL_50M",
+                                                         "UK_30_SAMPLE_POOL_20M","UK_30_SAMPLE_POOL_50M",
+                                                         "UK_POP_POOL_20M","UK_POP_POOL_50M"))
 
 head(metadata)
-newrows = which(rownames(metadata)%in%c("KENYA_30_SAMPLE_POOL","KENYA_POP_POOL","UK_30_SAMPLE_POOL","UK_POP_POOL"))
-newd = metadata[newrows,]
-rownames(newd) = c("KENYA_30_SAMPLE_POOL_20M","KENYA_30_SAMPLE_POOL_50M","UK_30_SAMPLE_POOL_20M","UK_30_SAMPLE_POOL_50M")
+newrowsk = which(rownames(metadata)%in%c("KENYA_30_SAMPLE_POOL","KENYA_POP_POOL")) #"UK_30_SAMPLE_POOL","UK_POP_POOL"
+newdk = rbind(metadata[newrowsk,],metadata[newrowsk,])
+newdk = newdk[order(rownames(newdk)),]
+rownames(newdk) = c("KENYA_30_SAMPLE_POOL_20M","KENYA_30_SAMPLE_POOL_50M","KENYA_POP_POOL_20M","KENYA_POP_POOL_50M") # "UK_30_SAMPLE_POOL_20M","UK_30_SAMPLE_POOL_50M","UK_POP_POOL_20M","UK_POP_POOL_50M"
+
+newrowsu = which(rownames(metadata)%in%c("UK_30_SAMPLE_POOL","UK_POP_POOL")) #"UK_30_SAMPLE_POOL","UK_POP_POOL"
+newdu = rbind(metadata[newrowsu,],metadata[newrowsu,])
+newdu = newdu[order(rownames(newdu)),]
+rownames(newdu) = c("UK_30_SAMPLE_POOL_20M","UK_30_SAMPLE_POOL_50M","UK_POP_POOL_20M","UK_POP_POOL_50M") # "UK_30_SAMPLE_POOL_20M","UK_30_SAMPLE_POOL_50M","UK_POP_POOL_20M","UK_POP_POOL_50M"
+
+newd = rbind(newdk, newdu)
+
 newd$`TOTAL COUNT` = meta_total_counts$total_read_count[newrows_subsamp]
-newd$Classification = c("Ken_30_Pool_20M","Ken_30_Pool_50M","Uk_30_Pool_20M", "Uk_30_Pool_50M")
-newd$`Number of Samples in Population Pool`= c(177,177,157,157)
+newd$Classification = c("Ken_30_Pool_20M","Ken_30_Pool_50M","Ken_pop_Pool_20M","Ken_pop_Pool_50M","Uk_30_Pool_20M", "Uk_30_Pool_50M","Uk_pop_Pool_20M", "Uk_pop_Pool_50M")
+newd$`Number of Samples in Population Pool`= c(177,177,177,177,157,157,157,157)
 metadata = rbind(metadata,newd) 
 
 fix(metadata)
@@ -517,7 +529,8 @@ dataBracken<- dataBracken %>%
   droplevels()
 
 
-ByMo4<-merge(ByMo3,dataBracken,by="Setting", all=TRUE)
+#ByMo4<-merge(ByMo3,dataBracken,by="Setting", all=TRUE)
+ByMo4<-merge(ByMo3,dataBracken, all=TRUE) # Changed to avoided the .x in the column names (evk 16 Feb 2024)
 
 ByMo4<-ByMo4[,c(1,2,3,4,5,8,9,10,6,7)]
 
