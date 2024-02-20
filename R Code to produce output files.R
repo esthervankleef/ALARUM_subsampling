@@ -45,6 +45,7 @@ library(igraph)
 # Metagenomics_Metadata.csv                   # Could not be found, took from code original paper; checked with Kevin, is the same, except for total read counts for the 20M and 50M, so added those manually using the "subsamping_reads_meta.xlsx file
 # Infection_Data_For_Bayesian_Model.csv       # Could not be found, took from code original paper
 # bracken_combined_reads.tsv                  # Could not be found, took from code original paper
+# This is now replaced by combined_bracken_species_v2.tsv
 
 # to produce the corrected resistance gene counts, plus a matrix that links each resistance gene and antibiotic based on the "Confers_Resistance_to_Antibiotic" relationship ontology term.
     # in the matrix, 1 == the gene is associated with clear experimental evidence of elevated MIC for that antibiotic but the "Confers_Resistance_to_Antibiotic" relationship ontology term is missing
@@ -92,7 +93,7 @@ fix(ARL)
 
 
 
-memory.limit(size = 1000000000)
+memory.limit(size = 1000000000) # Is depreciated
 names(SLC) = gsub(pattern = "CARD_", replacement = "", x = names(SLC))
 names(ARL) = gsub(pattern = "CARD_", replacement = "", x = names(ARL))
 names(CARD_read_count_specific) = gsub(pattern = "CARD_", replacement = "", x = names(CARD_read_count_specific))
@@ -440,8 +441,37 @@ Inf1<-read.csv("./Input Files/Original_paper/Infection_Data_For_Bayesian_Model.c
 attach(Inf1)
 fix(Inf1)
 
-ByMo3<-merge(ByMo2,Inf1,by=c("Antibiotic","Setting"),all=TRUE)
+head(Inf1)
 
+# EDITED BY EVK 20/2/2024: ENSURE THAT INFECTION DATA IS PRESENT FOR ALL DIFFERENT SAMPLE POOLS
+ByMo3<-merge(ByMo2,Inf1,by=c("Antibiotic","Setting"),all=TRUE)
+ByMo3$Res_Inf_Ent[ByMo3$Setting %in% c("KENYA_30_SAMPLE_POOL")] <- ByMo3$Res_Inf_Ent[ByMo3$Setting%in%"KENYA_POP_POOL"]
+ByMo3$Res_Inf_Ent[ByMo3$Setting %in% c("KENYA_30_SAMPLE_POOL_20M")] <- ByMo3$Res_Inf_Ent[ByMo3$Setting%in%"KENYA_POP_POOL"]
+ByMo3$Res_Inf_Ent[ByMo3$Setting %in% c("KENYA_30_SAMPLE_POOL_50M")] <- ByMo3$Res_Inf_Ent[ByMo3$Setting%in%"KENYA_POP_POOL"]
+ByMo3$Res_Inf_Ent[ByMo3$Setting %in% c("KENYA_POP_SAMPLE_POOL_20M")] <- ByMo3$Res_Inf_Ent[ByMo3$Setting%in%"KENYA_POP_POOL"]
+ByMo3$Res_Inf_Ent[ByMo3$Setting %in% c("KENYA_POP_SAMPLE_POOL_50M")] <- ByMo3$Res_Inf_Ent[ByMo3$Setting%in%"KENYA_POP_POOL"]
+
+
+ByMo3$Res_Inf_Ent[ByMo3$Setting %in% c("UK_30_SAMPLE_POOL")] <- ByMo3$Res_Inf_Ent[ByMo3$Setting%in%"UK_POP_POOL"]
+ByMo3$Res_Inf_Ent[ByMo3$Setting %in% c("UK_30_SAMPLE_POOL_20M")] <- ByMo3$Res_Inf_Ent[ByMo3$Setting%in%"UK_POP_POOL"]
+ByMo3$Res_Inf_Ent[ByMo3$Setting %in% c("UK_30_SAMPLE_POOL_50M")] <- ByMo3$Res_Inf_Ent[ByMo3$Setting%in%"UK_POP_POOL"]
+ByMo3$Res_Inf_Ent[ByMo3$Setting %in% c("UK_POP_SAMPLE_POOL_20M")] <- ByMo3$Res_Inf_Ent[ByMo3$Setting%in%"UK_POP_POOL"]
+ByMo3$Res_Inf_Ent[ByMo3$Setting %in% c("UK_POP_SAMPLE_POOL_50M")] <- ByMo3$Res_Inf_Ent[ByMo3$Setting%in%"UK_POP_POOL"]
+
+ByMo3$Tot_Tested_Ent[ByMo3$Setting %in% c("KENYA_30_SAMPLE_POOL")] <- ByMo3$Tot_Tested_Ent[ByMo3$Setting%in%"KENYA_POP_POOL"]
+ByMo3$Tot_Tested_Ent[ByMo3$Setting %in% c("KENYA_30_SAMPLE_POOL_20M")] <- ByMo3$Tot_Tested_Ent[ByMo3$Setting%in%"KENYA_POP_POOL"]
+ByMo3$Tot_Tested_Ent[ByMo3$Setting %in% c("KENYA_30_SAMPLE_POOL_50M")] <- ByMo3$Tot_Tested_Ent[ByMo3$Setting%in%"KENYA_POP_POOL"]
+ByMo3$Tot_Tested_Ent[ByMo3$Setting %in% c("KENYA_POP_SAMPLE_POOL_20M")] <- ByMo3$Tot_Tested_Ent[ByMo3$Setting%in%"KENYA_POP_POOL"]
+ByMo3$Tot_Tested_Ent[ByMo3$Setting %in% c("KENYA_POP_SAMPLE_POOL_50M")] <- ByMo3$Tot_Tested_Ent[ByMo3$Setting%in%"KENYA_POP_POOL"]
+
+
+ByMo3$Tot_Tested_Ent[ByMo3$Setting %in% c("UK_30_SAMPLE_POOL")] <- ByMo3$Tot_Tested_Ent[ByMo3$Setting%in%"UK_POP_POOL"]
+ByMo3$Tot_Tested_Ent[ByMo3$Setting %in% c("UK_30_SAMPLE_POOL_20M")] <- ByMo3$Tot_Tested_Ent[ByMo3$Setting%in%"UK_POP_POOL"]
+ByMo3$Tot_Tested_Ent[ByMo3$Setting %in% c("UK_30_SAMPLE_POOL_50M")] <- ByMo3$Tot_Tested_Ent[ByMo3$Setting%in%"UK_POP_POOL"]
+ByMo3$Tot_Tested_Ent[ByMo3$Setting %in% c("UK_POP_SAMPLE_POOL_20M")] <- ByMo3$Tot_Tested_Ent[ByMo3$Setting%in%"UK_POP_POOL"]
+ByMo3$Tot_Tested_Ent[ByMo3$Setting %in% c("UK_POP_SAMPLE_POOL_50M")] <- ByMo3$Tot_Tested_Ent[ByMo3$Setting%in%"UK_POP_POOL"]
+
+ByMo3 <- ByMo3 %>% filter(!Setting %in% c("UK_POP_POOL","CAMBODIA_POP_POOL","KENYA_POP_POOL"))
 
 ######################################################################
 # WAITING FOR THE RIGHT FILE TO BE SHARED BY KEVIN (EVK 15 February 2024)
@@ -457,43 +487,53 @@ ByMo3<-merge(ByMo2,Inf1,by=c("Antibiotic","Setting"),all=TRUE)
 
 # Basically, code below uses these full ranks to filter out enterobacteriaceae species so is helpful to have
 
-Tx1<-read.csv("./Input Files/Original_paper/bracken_combined_reads.tsv", sep = "\t",header=T,check.names = F, row.names = 1, quote = "#")
+#Tx1<-read.csv("./Input Files/Original_paper/bracken_combined_reads.tsv", sep = "\t",header=T,check.names = F, row.names = 1, quote = "#")
+#attach(Tx1)
+#fix(Tx1)
+
+# With the file provided by Kevin; this replaces the above (evk 20/2/2024)
+#Tx1a<-read.csv("./Input Files/combined_bracken_species_v2.tsv", sep = "\t",header=T,check.names = F, row.names = 1, quote = "#")
+Tx1<-read_tsv("./Input Files/combined_bracken_species_v2.tsv", col_names = T,col_types="c")
+dup_lin = Tx1$lineage[which(duplicated(Tx1$lineage))] # duplicates are NAs
+dup_lin
+Tx1 <- Tx1[!duplicated(Tx1$lineage),]
+Tx1 <- Tx1[!is.na(Tx1$lineage),]
 attach(Tx1)
 fix(Tx1)
+row.names(Tx1) <- Tx1$lineage
+colnames(Tx1) <- gsub(".bracken", "",colnames(Tx1))
 
-# With the file provided by Kevin
-Tx1a<-read.csv("./Input Files/combined_bracken_species.csv", sep = "\t",header=T,check.names = F, row.names = 1, quote = "#")
-attach(Tx1a)
-fix(Tx1a)
 
 Tx2<-Tx1[,grepl("POOL",colnames(Tx1))]
-Tx2 <- add_rownames(Tx2, "Taxonomy")
+#Tx2 <- add_rownames(Tx2, "Taxonomy")
+Tx2 <- rownames_to_column(Tx2, "Taxonomy")
+
 Tx3<- Tx2 %>%
   filter(grepl("k__Bacteria",Taxonomy)) %>% 
   droplevels()
 
-d3<-filter(Tx3 [,2:7])
+d3<-filter(Tx3 [,2:11])
 d3<-d3 %>% replace(is.na(.), 0)
 AllBacteria<-as.data.frame(t(colSums(d3 [,])))
 
 
 Tx3<-Tx3 %>% replace(is.na(.), 0)
 ecol<-Tx3[grep("g__Escherichia;s__Escherichia coli", Tx3$Taxonomy), ]
-ecol<-filter(ecol [,2:7])
+ecol<-filter(ecol [,2:11])
 kle<-Tx3[grep("g__Klebsiella;s__Klebsiella pneumoniae", Tx3$Taxonomy), ]
-kle<-filter(kle [,2:7])
+kle<-filter(kle [,2:11])
 
 eb<-Tx3[grep("g__Enterobacter;", Tx3$Taxonomy), ]
-eb<-filter(eb [,2:7])
+eb<-filter(eb [,2:11])
 eb<-as.data.frame(t(colSums(eb [,])))
 sal<-Tx3[grep("g__Salmonella;", Tx3$Taxonomy), ]
-sal<-filter(sal [,2:7])
+sal<-filter(sal [,2:11])
 sal<-as.data.frame(t(colSums(sal [,])))
 f_E<-Tx3[grep("f__Enterobacteriaceae;", Tx3$Taxonomy), ]
-f_E<-filter(f_E [,2:7])
+f_E<-filter(f_E [,2:11])
 f_E<-as.data.frame(t(colSums(f_E [,])))
 o_E<-Tx3[grep("o__Enterobacterales;", Tx3$Taxonomy), ]
-o_E<-filter(o_E [,2:7])
+o_E<-filter(o_E [,2:11])
 o_E<-as.data.frame(t(colSums(o_E [,])))
 
 ClinicalGroups<-rbind(ecol,kle,eb,sal)
@@ -524,12 +564,15 @@ names(dataBracken)[names(dataBracken) == "SampleID1"] <- "Setting"
 dataBracken$SampleID2<-NULL
 dataBracken$SampleID3<-NULL
 
-dataBracken<- dataBracken %>%
-  filter(grepl("POP_POOL",Setting)) %>% 
-  droplevels()
+# dataBracken<- dataBracken %>%
+#   filter(grepl("POP_POOL",Setting)) %>% # 
+#   droplevels()
 
 
 #ByMo4<-merge(ByMo3,dataBracken,by="Setting", all=TRUE)
+ByMo3 <- ByMo3 %>% filter(!Setting %in% c("KENYA_POP_POOL","CAMBODIA_POP_POOL","UK_POP_POOL"))
+
+
 ByMo4<-merge(ByMo3,dataBracken, all=TRUE) # Changed to avoided the .x in the column names (evk 16 Feb 2024)
 
 ByMo4<-ByMo4[,c(1,2,3,4,5,8,9,10,6,7)]

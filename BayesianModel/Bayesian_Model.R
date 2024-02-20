@@ -1,5 +1,6 @@
 # replace "~/Desktop/Shared Code for Soon" by "folder-location"
-location_of_readme <- "~/Desktop/folder-location"
+#location_of_readme <- "~/Desktop/folder-location"
+location_of_readme<- "C:/Users/evankleef/OneDrive - ITG/Documenten/GitHub/ITG/Other_projects/AMR/ALARUM/Analyses/ALARUM_subsampling/BayesianModel"
 
 # load libraries 
 library(tidyverse)
@@ -12,7 +13,8 @@ rstan_options(auto_write = TRUE)
 n_chains <- 4
 
 # load data  
-dd <- read_csv(file=str_c(location_of_readme,'/data/Dataset_For_Bayesian_Model.csv') ) %>% 
+#dd <- read_csv(file=str_c(location_of_readme,'/data/Dataset_For_Bayesian_Model.csv') ) %>% 
+dd <- read_csv(file=str_c(location_of_readme,'/Data_For_Model/Dataset_For_Bayesian_Model.csv') ) %>% 
                 select(Antibiotic,Setting,
                        Rcgc_1_2,
                        Rcgc_2,
@@ -22,6 +24,7 @@ dd <- read_csv(file=str_c(location_of_readme,'/data/Dataset_For_Bayesian_Model.c
                        Rtax_o_E_Bracken,
                        Res_Inf_Ent,
                        Tot_Tested_Ent)
+
 #  split column Antibiotic
 dd1 <- dd %>% separate(Antibiotic, into=c("Antibiotic","count"),sep = " " ) %>% select(-count)
 # rename cols

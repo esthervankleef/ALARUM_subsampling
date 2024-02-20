@@ -1,0 +1,68 @@
+"","name","taxonomy_id","KENYA_30_SAMPLE_POOL_20M.bracken","KENYA_30_SAMPLE_POOL_50M.bracken","KENYA_30_SAMPLE_POOL.bracken","KENYA_POP_POOL_20M.bracken","KENYA_POP_POOL_50M.bracken","UK_30_SAMPLE_POOL_20M.bracken","UK_30_SAMPLE_POOL_50M.bracken","UK_30_SAMPLE_POOL.bracken","UK_POP_POOL_20M.bracken","UK_POP_POOL_50M.bracken","lineage"
+"1","Mannheimia ovis",2679994,3,11,53,2,22,14,11,51,0,0,NA
+"2","Thauera sp. MZ1T",85643,14,33,138,17,41,27,69,278,30,90,NA
+"3","Thauera sp. PIV-1",204461,12,23,100,16,61,20,40,125,62,141,NA
+"4","Tateyamaria sp. YMD87",3042301,7,16,57,8,11,6,19,80,10,36,NA
+"5","Eubacterium sp. c-25",2841037,444,1050,3982,566,1510,919,2273,8128,1117,2745,NA
+"6","Alkalihalobacillus sp. DSM 23008",3025676,15,27,93,15,27,4,34,58,17,9,NA
+"7","Mycolicibacter sp. MYC123",2855502,3,5,20,12,24,2,8,37,3,27,NA
+"8","Microbacterium sp. SSW1-36",2851648,14,11,71,12,35,11,26,90,18,35,NA
+"9","Microbacterium sp. SSW1-51",2851650,2,14,74,14,21,14,48,157,19,54,NA
+"10","Microcella sp. MMS21-STM26",2994972,7,10,33,6,16,8,22,64,3,20,NA
+"11","Nocardiopsis sp. DZFXJ 01",3029201,15,35,139,15,27,3,25,83,0,29,NA
+"12","Methylacidiphilum sp. IT5",2795384,2,6,42,13,23,9,19,79,11,12,NA
+"13","Escherichia virus ST0",2560454,1,19,62,2,7,0,0,0,0,0,NA
+"14","Fadolivirus 1",2740746,2,5,15,3,11,2,3,21,1,0,NA
+"15","Agrobacterium fabacearum",1183401,0,10,58,31,23,25,46,149,10,19,NA
+"16","Vibrio virus 2019VC1",2761539,0,1,4,0,0,0,0,0,0,0,NA
+"17","Kuravirus ECB2",1987939,0,1,1,0,0,0,0,0,0,0,NA
+"18","Sabo orthobunyavirus",2560716,0,1,1,0,0,0,0,0,0,0,NA
+"19","Sedlec orthobunyavirus",2846173,0,1,1,0,0,0,0,0,0,0,NA
+"20","Tai herbevirus",1980537,0,1,2,0,0,0,0,0,0,0,NA
+"21","Yogue orthonairovirus",2846690,0,1,1,0,0,0,0,0,0,0,NA
+"22","Spider shaspivirus",2509384,0,1,1,0,0,0,0,0,0,0,NA
+"23","Grapevine laulavirus 2",2844684,0,2,5,0,0,0,0,0,0,0,NA
+"24","Dipteran muscodensovirus 1",2844089,0,1,1,0,0,0,0,0,0,0,NA
+"25","Aphabaculovirus oxochraceae",3048240,0,1,1,0,0,0,1,2,1,1,NA
+"26","Nocardia sp. Y13_IFM12275",2986278,0,0,26,7,5,0,13,52,5,20,NA
+"27","Tequatrovirus cf2",2844238,0,0,4,36,69,0,0,0,0,0,NA
+"28","Shigella virus SHBML-50-1",2846202,0,0,4,13,56,0,0,0,3,3,NA
+"29","Oliverocinquevirus OLIVR5",2956233,0,0,1,0,0,0,0,0,0,0,NA
+"30","Bat betaherpesvirus B7D8",1195167,0,0,1,0,0,0,0,0,0,0,NA
+"31","Daphnia iridovirus 1",1934253,0,0,1,0,0,0,1,2,1,2,NA
+"32","Enseada orthobunyavirus",2560413,0,0,2,0,0,0,0,1,0,0,NA
+"33","Kairi orthobunyavirus",1933276,0,0,1,0,0,0,0,0,0,0,NA
+"34","Estero Real orthonairovirus",2560465,0,0,1,0,0,0,0,0,0,0,NA
+"35","Primate bocaparvovirus 1",1511871,0,0,1,0,1,0,0,0,0,0,NA
+"36","Betatorquevirus homini32",3048399,0,0,1,0,0,0,0,0,0,0,NA
+"37","Gammanudivirus cracrangoni",2955937,0,0,1,1,2,0,0,0,0,0,NA
+"38","Drosophila melanogaster nudivirus A",2844101,0,0,1,0,0,0,0,0,0,0,NA
+"39","Mosigvirus hp3",2560445,0,0,0,4,9,0,0,0,0,0,NA
+"40","Haartmanvirus R201",2732036,0,0,0,1,1,2,4,12,1,2,NA
+"41","Staphylococcus phage vB_SepP_BE03",2750282,0,0,0,32,67,0,0,1,0,0,NA
+"42","Salmonella phage vB_SalS-LPSTLL",2686282,0,0,0,3,22,0,0,1,0,2,NA
+"43","Kuravirus septima11",1987941,0,0,0,2,1,0,0,0,0,0,NA
+"44","Beilong jeilongvirus",2560345,0,0,0,1,1,0,0,0,0,0,NA
+"45","Heimat hartmanivirus",2844821,0,0,0,2,3,0,0,0,0,0,NA
+"46","Tigray orthohantavirus",2560807,0,0,0,1,1,0,0,0,0,0,NA
+"47","Groundnut bud necrosis orthotospovirus",1933261,0,0,0,1,1,0,0,0,0,0,NA
+"48","Mythimna unipuncta granulovirus A",2169745,0,0,0,1,0,0,0,0,0,0,NA
+"49","Glossina hytrosavirus",2747309,0,0,0,1,1,0,0,0,0,0,NA
+"50","Actinomadura sp. ATCC 31491",2917990,0,0,0,0,1,0,0,1,0,0,NA
+"51","Mycoplasma sp. 97/66",2963127,0,0,0,0,25,4,7,26,0,10,NA
+"52","Schmallenberg orthobunyavirus",2560743,0,0,0,0,1,0,0,1,1,0,NA
+"53","Drosophila melanogaster nudivirus D",2844104,0,0,0,0,1,0,0,0,0,0,NA
+"54","Pseudomonas sp. S1Bt3",2995172,0,0,0,0,0,0,2770,3132,0,0,NA
+"55","Nipah henipavirus",121791,0,0,0,0,0,0,1,1,0,0,NA
+"56","Myodes narmovirus",2560610,0,0,0,0,0,0,1,1,0,0,NA
+"57","Fort Sherman orthobunyavirus",2560477,0,0,0,0,0,0,1,1,0,0,NA
+"58","Pteropus lylei-associated alphaherpesvirus",2597167,0,0,0,0,0,0,0,1,0,1,NA
+"59","Giant squirrel respirovirus",2282853,0,0,0,0,0,0,0,1,1,1,NA
+"60","Bunyamwera orthobunyavirus",1933179,0,0,0,0,0,0,0,1,0,0,NA
+"61","Kibale herbevirus",1980535,0,0,0,0,0,0,0,1,0,0,NA
+"62","Gammanudivirus camaenasi",2955936,0,0,0,0,0,0,0,1,0,0,NA
+"63","Drosophila melanogaster nudivirus C",2844103,0,0,0,0,0,0,0,1,0,0,NA
+"64","Hepacivirus D",2008763,0,0,0,0,0,0,0,0,1,1,NA
+"65","Lepidopteran iteradensovirus 3",1513212,0,0,0,0,0,0,0,0,0,1,NA
+"66","Hughes orthonairovirus",1980523,0,0,0,0,0,0,0,0,0,1,NA
+"67","Turlock orthobunyavirus",35320,0,0,0,0,0,0,0,0,0,1,NA
